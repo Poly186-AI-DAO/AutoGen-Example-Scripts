@@ -66,5 +66,3 @@ user_proxy.initiate_chat(
     assistant,
     message="Suggest a fix to an open good first issue of autogen",
 )
-
-print("Script execution completed!")

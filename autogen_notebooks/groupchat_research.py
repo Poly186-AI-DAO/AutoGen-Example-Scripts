@@ -4,7 +4,7 @@ from flaml import autogen
 config_list_gpt4 = autogen.config_list_from_json(
     "../OAI_CONFIG_LIST.json",
     filter_dict={
-        "model": ["gpt-4-32k"],
+        "model": ["gpt-4-0613", "gpt-4", "gpt-4-0314"],
     },
 )
 
@@ -53,20 +53,8 @@ critic = autogen.AssistantAgent(
 )
 groupchat = autogen.GroupChat(agents=[user_proxy, engineer, scientist, planner, executor, critic], messages=[], max_round=50)
 manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=gpt4_config)
-
 user_proxy.initiate_chat(
     manager,
-    message="""
-find papers on LLM applications from arxiv in the last week, create a markdown table of different domains.
-""",
-)
-
-groupchat_nocritic = autogen.GroupChat(agents=[user_proxy, engineer, scientist, planner, executor], messages=[], max_round=50)
-for agent in groupchat.agents:
-    agent.reset()
-manager_nocritic = autogen.GroupChatManager(groupchat=groupchat_nocritic, llm_config=gpt4_config)
-user_proxy.initiate_chat(
-    manager_nocritic,
     message="""
 find papers on LLM applications from arxiv in the last week, create a markdown table of different domains.
 """,
