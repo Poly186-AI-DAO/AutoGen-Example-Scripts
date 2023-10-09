@@ -1,8 +1,8 @@
 # Import necessary libraries
-from flaml import autogen
+from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
 
 # Set up configurations
-config_list = autogen.config_list_from_json(
+config_list = config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
         "model": ["gpt4", "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-v0314"],
@@ -17,12 +17,12 @@ llm_config = {
 }
 
 # Construct agents
-assistant = autogen.AssistantAgent(
+assistant = AssistantAgent(
     name="assistant",
     llm_config=llm_config,
 )
 
-user_proxy = autogen.UserProxyAgent(
+user_proxy = UserProxyAgent(
     name="user_proxy",
     human_input_mode="TERMINATE",
     max_consecutive_auto_reply=10,
